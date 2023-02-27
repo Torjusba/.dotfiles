@@ -17,9 +17,9 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # Default programs
-export EDITOR=vim
+export EDITOR=nvim
 export BROWSER=firefox
-export TERMINAL=st
+export TERMINAL=gnome-terminal
 
 # Add snap bin to path if it exists
 if [ -d "/snap/bin" ]; then
