@@ -97,4 +97,56 @@ function plantuml_watch() {
   while sleep 1; do watch -gn .1 stat -c %Z "$1" && plantuml "$1"; done
 }
 
-alias vactivate="source venv/bin/activate"
+function va {
+    if [[ $1 == "" ]]; then
+        wd="."
+    else
+        wd="$1"
+    fi
+    echo "sourcing $wd/venv/bin/activate"
+    pushd -q "$wd"
+    source venv/bin/activate
+    if [[ $wd != "." ]]; then
+        popd -q
+    fi
+}
+
+export TOPOFMIND="$HOME/Documents/PersonalNotes/_main/Top\ of\ mind.md"
+alias tom="vim $TOPOFMIND"
+
+function note() {
+    notepath=$HOME/Documents/PersonalNotes/Inbox
+    if [[ $1 != "" ]]; then
+        suffix=""
+        if [[ ! $1 =~ ".md" ]]; then
+            suffix=".md"
+        fi
+        vim -c "cd $notepath" $notepath/$1$suffix
+    else
+        pushd $notepath
+    fi
+}
+
+function avinote() {
+    avinotepath=$HOME/Documents/PersonalNotes/Aviant
+    if [[ $1 != "" ]]; then
+        suffix=""
+        if [[ ! $1 =~ ".md" ]]; then
+            suffix=".md"
+        fi
+        vim -c "cd $avinotepath" $avinotepath/$1$suffix
+    else
+        pushd $avinotepath
+    fi
+}
+
+function worklog() {
+    worklogpath=$HOME/Documents/PersonalNotes/Worklog
+    dateargs=""
+    if [[ $1 != "" ]]; then
+        dateargs="-d $1"
+    fi
+    vim -c "cd $worklogpath" $worklogpath/worklog-$(date -I $dateargs).md
+    
+}
+alias wl=worklog
