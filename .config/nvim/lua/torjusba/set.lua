@@ -27,3 +27,6 @@ vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
 vim.g.airline_theme = "minimalist"
+
+
+vim.g.filetype_typ = "typst"

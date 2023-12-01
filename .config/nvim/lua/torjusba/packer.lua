@@ -14,14 +14,15 @@ return require('packer').startup(function(use)
 
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/nvim-treesitter-context')
+    use("vrischmann/tree-sitter-templ")
 	use('theprimeagen/harpoon')
-	use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
+	-- use({
+        -- 'rose-pine/neovim',
+        -- as = 'rose-pine',
+        -- config = function()
+            -- vim.cmd('colorscheme rose-pine')
+        -- end
+    -- })
     use('EdenEast/nightfox.nvim')
 	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
@@ -52,4 +53,22 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'}, -- Optional
 		}
 	}
+    use {
+        "zbirenbaum/copilot.lua" ,
+        -- cmd="Copilot",
+        -- event="InsertEnter",
+        config= function()
+            require("copilot").setup({
+                panel = {
+                    auto_refresh = true,
+                },
+                suggestion = {
+                    auto_trigger = true,
+                }
+                -- filetypes = {
+                    -- ["*"] = true,
+                -- }
+            })
+        end,
+    }
 end)

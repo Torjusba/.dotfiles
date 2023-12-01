@@ -3,10 +3,10 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'sumneko_lua',
+    'lua_ls',
 })
 
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
@@ -48,3 +48,13 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true
 })
+
+require('lspconfig.configs').templ = {
+    default_config = {
+        cmd = {"templ", "lsp"},
+        filetypes = {"templ"},
+        root_dir = require('lspconfig').util.root_pattern("go.mod"),
+        settings = {},
+    };
+}
+require("lspconfig").templ.setup({})
