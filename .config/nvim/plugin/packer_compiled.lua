@@ -105,11 +105,6 @@ _G.packer_plugins = {
     path = "/home/torjusba/.local/share/nvim/site/pack/packer/start/copilot.lua",
     url = "https://github.com/zbirenbaum/copilot.lua"
   },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/home/torjusba/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-    url = "https://github.com/rafamadriz/friendly-snippets"
-  },
   ["git-worktree.nvim"] = {
     loaded = true,
     path = "/home/torjusba/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
@@ -184,11 +179,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/torjusba/.local/share/nvim/site/pack/packer/start/tree-sitter-templ",
     url = "https://github.com/vrischmann/tree-sitter-templ"
-  },
-  undotree = {
-    loaded = true,
-    path = "/home/torjusba/.local/share/nvim/site/pack/packer/start/undotree",
-    url = "https://github.com/mbbill/undotree"
   },
   ["vim-airline"] = {
     loaded = true,

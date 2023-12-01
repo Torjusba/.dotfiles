@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
         -- end
     -- })
     use('EdenEast/nightfox.nvim')
-	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
     use('vim-airline/vim-airline')
     use('vim-airline/vim-airline-themes')
@@ -50,7 +49,7 @@ return require('packer').startup(function(use)
 
 			-- Snippets
 			{'L3MON4D3/LuaSnip'},             -- Required
-			{'rafamadriz/friendly-snippets'}, -- Optional
+			-- {'rafamadriz/friendly-snippets'}, -- Optional
 		}
 	}
     use {
