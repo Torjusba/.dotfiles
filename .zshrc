@@ -173,14 +173,32 @@ function worklog() {
     
 }
 
+function temporary_note() {
+    tempnotepath=$NOTES/Temporary\ notes
+    suffix=""
+    if [[ ! $1 =~ ".md" ]]; then
+        suffix=".md"
+    fi
+    if [[ $1 != "" ]]; then
+        vim -c "cd $tempnotepath" $tempnotepath/$1$suffix
+    else
+        vim -c "cd $tempnotepath"
+    fi
+    
+}
+
+
 function recent() {
     find "$NOTES" -not -path "$NOTES/\.*" -type f -printf '%T@ %p\n' | sort -k1,1nr | head -n 100 | awk '{ print $NF }' | fzf --print0 --preview="cat {}" --delimiter / --with-nth -1 | xargs -0 -o nvim
 }
 alias re=recent
 alias wl=worklog
 alias mn=meeting_note
+alias tn=temporary_note
 alias meet=meeting_note
-alias todo="vim $NOTES/Aviant/todo.md"
+function todo() {
+    vim -c "cd $NOTES" $NOTES/Aviant/todo.md
+}
 
 alias pdftk="java -jar $HOME/.local/bin/pdftk-all.jar"
 alias ghostscript="/usr/bin/gs"
@@ -188,3 +206,14 @@ alias gs="echo ghostsrcipt is aliased to /usr/bin/gs. Use ghostscript instead."
 
 export PATH="/home/torjusba/go/bin:$PATH"
 export PATH="/home/torjusba/.local/bin:$PATH"
+alias open=xdg-open
+
+alias avpn="sudo ~/Aviant/vpn_configs/openvpn-multidrone/vpn-connect.sh"
+
+function various_scripts() {
+    cd $HOME/Aviant/various_scripts
+    va
+}
+
+alias ding="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
+

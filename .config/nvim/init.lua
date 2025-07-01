@@ -28,12 +28,17 @@ vim.opt.updatetime = 50
 -- vim.opt.colorcolumn = "120"
 
 vim.g.airline_theme = "minimalist"
+vim.opt.formatoptions:remove("o")
 
 -- Keymaps
 
 -- center screen after jumping
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
+
+-- quickfix list jumping
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -89,6 +94,7 @@ require("lazy").setup({
     },
     "nvim-treesitter/nvim-treesitter-context",
     "theprimeagen/harpoon",
+    --[[ Copilot is out because of missing subscription
     {
         "zbirenbaum/copilot.lua",
         config = function()
@@ -105,4 +111,6 @@ require("lazy").setup({
             })
         end,
     },
+    --]]
+    "tpope/vim-fugitive",
 })

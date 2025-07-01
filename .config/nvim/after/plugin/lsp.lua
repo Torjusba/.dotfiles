@@ -1,8 +1,19 @@
-print("Got this far")
+local fortune_handle = io.popen('fortune -s')
+if not fortune_handle then
+    print("Failed to read fortune")
+else
+    local fortune = fortune_handle:read("*a")
+    fortune_handle:close()
+    fortune = string.gsub(fortune, "[\n\r]", " ")
+    fortune = string.gsub(fortune, "%s+", " ")
+    fortune = string.sub(fortune, 1, 60)
+    print(fortune)
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
     callback = function(event)
-        print("LspAttach")
+        -- print("LspAttach")
         local opts = {buffer = bufnr, remap = false}
 
         vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
