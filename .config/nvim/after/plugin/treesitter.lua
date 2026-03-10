@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
-  ensure_installed = { "c", "cpp", "lua", "javascript", "typescript", "vim", "python" },
+  ensure_installed = { "c", "cpp", "lua", "javascript", "typescript", "vim", "python"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -26,16 +26,3 @@ require'nvim-treesitter.configs'.setup {
 require'treesitter-context'.setup {
     mode = 'topline'
 }
-
---[[
-local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-treesitter_parser_config.templ = {
-  install_info = {
-    url = "https://github.com/vrischmann/tree-sitter-templ.git",
-    files = {"src/parser.c", "src/scanner.c"},
-    branch = "master",
-  },
-}
-vim.treesitter.language.register('templ', 'templ')
-]]--
-

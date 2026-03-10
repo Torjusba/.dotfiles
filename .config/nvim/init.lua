@@ -3,6 +3,8 @@ vim.g.mapleader = " "
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+
+vim.g.clipboard = "xclip"
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 0
@@ -42,17 +44,6 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
-vim.keymap.set("n", "<leader>ec", function ()
-    local filetype = vim.bo.filetype
-    if filetype == "python" then
-        vim.cmd('!python %')
-    elseif filetype == "rust" then
-        vim.cmd('cargo run')
-    else
-        print("Execute current is not implemented for filetype", vim.bo.filetype)
-    end
-end)
-
 -- Packages
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -76,12 +67,11 @@ require("lazy").setup({
             vim.cmd([[colorscheme nightfox]])
         end,
     },
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/vim-vsnip",
+    {"mason-org/mason.nvim", opts = {} },
+    {
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = { "neovim/nvim-lspconfig" },
+    },
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {
@@ -94,23 +84,10 @@ require("lazy").setup({
     },
     "nvim-treesitter/nvim-treesitter-context",
     "theprimeagen/harpoon",
-    --[[ Copilot is out because of missing subscription
-    {
-        "zbirenbaum/copilot.lua",
-        config = function()
-            require("copilot").setup({
-                panel = {
-                    auto_refresh = true,
-                },
-                suggestion = {
-                    auto_trigger = true,
-                }
-                -- filetypes = {
-                    -- ["*"] = true,
-                -- }
-            })
-        end,
-    },
-    --]]
-    "tpope/vim-fugitive",
+    "tpope/vim-fugitive",  -- git
+    "tpope/vim-abolish",  -- fancy %S
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
 })
+
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
