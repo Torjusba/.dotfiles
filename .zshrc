@@ -1,3 +1,5 @@
+export EDITOR="vim"
+
 function log_error {
 	echo -e "\033[0;31m"$1"\033[0;m"
 }
@@ -15,8 +17,23 @@ function try_source_silent {
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-alias vim=nvim
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+else
+    echo "got here"
+fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if command -v nvim &>/dev/null; then
+    alias vim=nvim
+else
+    echo "WARN: nvim not found!"
+fi
 
 
 # Use 'clean' for remotes and servers
@@ -52,8 +69,8 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git
-zsh-z
+    git
+    z
 )
 # Pretty completion for z plugin
 zstyle ':completion:*' menu select
@@ -87,8 +104,6 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 try_source_silent $HOME/.fzf.zsh
 try_source_silent /opt/ros/noetic/setup.zsh
 try_source_silent $HOME/Ascend/mission9_pipeline/devel/setup.zsh
-
-#export PATH="/home/torjusba/miniconda3/bin:$PATH"
 
 alias plantuml="java -jar /home/torjusba/Downloads/plantuml.jar"
 alias fd="/usr/bin/fdfind"
@@ -204,8 +219,6 @@ alias pdftk="java -jar $HOME/.local/bin/pdftk-all.jar"
 alias ghostscript="/usr/bin/gs"
 alias gs="echo ghostsrcipt is aliased to /usr/bin/gs. Use ghostscript instead."
 
-export PATH="/home/torjusba/go/bin:$PATH"
-export PATH="/home/torjusba/.local/bin:$PATH"
 alias open=xdg-open
 
 alias avpn="sudo ~/Aviant/vpn_configs/openvpn-multidrone/vpn-connect.sh"
